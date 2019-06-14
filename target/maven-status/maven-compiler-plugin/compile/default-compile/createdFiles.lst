@@ -1,0 +1,4 @@
+br\com\teste\model\Log.class
+br\com\teste\main\Main.class
+br\com\teste\repository\LogRepository.class
+br\com\teste\service\MetricasLogService.class
