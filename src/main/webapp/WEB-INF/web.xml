@@ -3,15 +3,17 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Teste Java</display-name>
-  <filter>SparkFilter</filter>
-  <filter-class>spark.servlet.SparkFilter</filter-class>
-  <init-param>
-  	<param-name>consultaLog</param-name>
-  	<param-value>br.com.teste.main.ConsultaLogResourceSpark</param-value>
-  </init-param>
-  <filter-mapping>
-  	<filter-name>SparkFilter</filter-name>
-  	<url-pattern>/api</url-pattern>
-  </filter-mapping>
+	<display-name>Teste Java</display-name>
+	<filter>
+		<filter-name>spark</filter-name>
+		<filter-class>spark.servlet.SparkFilter</filter-class>
+		<init-param>
+			<param-name>consultaLog</param-name>
+			<param-value>br.com.teste.main.ConsultaLogResourceSpark</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>spark</filter-name>
+		<url-pattern>/api</url-pattern>
+	</filter-mapping>
 </web-app>

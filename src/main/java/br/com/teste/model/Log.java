@@ -1,8 +1,11 @@
 package br.com.teste.model;
 
+import javax.servlet.annotation.WebServlet;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+@WebServlet("")
 @DatabaseTable(tableName = "logs")
 public class Log {
 	
