@@ -14,7 +14,7 @@ public class InserirLogService {
 	}
 	public String inserirLog(List<Log> logs) {
 		try {			
-			
+			rep.inserirLog(logs);
 			return "Inserido com sucesso";
 			
 		}catch(Exception e) {

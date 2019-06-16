@@ -11,7 +11,7 @@ import com.j256.ormlite.table.TableUtils;
 
 import br.com.teste.model.Log;
 
-public class LogRepository<T> {
+public class LogRepository {
 	
 	public ConnectionSource conexao;
 	
@@ -36,17 +36,14 @@ public class LogRepository<T> {
 			e.printStackTrace();
 		}
 	}
-	public void manterTabela(ConnectionSource con, Class<T> O) {
-		try{
-			TableUtils.createTableIfNotExists(con, O);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public void inserirLog(List<Log> logs) {
 		try {
+			TableUtils.createTableIfNotExists(this.conexao, Log.class);
 			Dao<Log,String> logDao = DaoManager.createDao(conexao, Log.class);
+			for (Log log : logDao) {
+				logDao.createOrUpdate(log);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
