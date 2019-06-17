@@ -1,7 +1,11 @@
 package br.com.teste.utils;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import br.com.teste.model.Log;
 import spark.Request;
@@ -11,11 +15,9 @@ public class TrataComunicacao {
 	
 	public List<Log> trataRequisicao(Request request, Response response){
 		
-		String url = request.queryParams("url");
-		String tempo = request.queryParams("timestamp");
-		String uuid = request.queryParams("uuid");
-		String codRegiao = request.queryParams("codRegiao");
+		Gson gson = new Gson();
+		Type tipoLista = new TypeToken<ArrayList<Log>>(){}.getType();
+		return gson.fromJson(request.queryParams("logs"), tipoLista);				
 		
-		return new ArrayList<>();
 	}
 }

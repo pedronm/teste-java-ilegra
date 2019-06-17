@@ -1,3 +1,4 @@
+
 package br.com.teste.repository;
 
 import java.sql.SQLException;
@@ -48,7 +49,4 @@ public class LogRepository {
 			e.printStackTrace();
 		}
 	}
-	
-
-
 }
