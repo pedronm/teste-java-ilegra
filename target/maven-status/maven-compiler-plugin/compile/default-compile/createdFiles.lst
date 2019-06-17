@@ -1,0 +1,9 @@
+br\com\teste\service\InserirLogService.class
+br\com\teste\utils\Propriedades.class
+br\com\teste\engine\ConsultaLogResourceSpark.class
+br\com\teste\utils\TrataComunicacao.class
+br\com\teste\repository\LogRepository.class
+br\com\teste\model\Log.class
+br\com\teste\utils\TrataComunicacao$1.class
+br\com\teste\utils\JsonTransformer.class
+br\com\teste\service\MetricasLogService.class

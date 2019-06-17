@@ -1,4 +1,8 @@
 C:\Users\pedrodonascimento\git\teste-java-ilegra\src\main\java\br\com\teste\engine\ConsultaLogResourceSpark.java
 C:\Users\pedrodonascimento\git\teste-java-ilegra\src\main\java\br\com\teste\repository\LogRepository.java
+C:\Users\pedrodonascimento\git\teste-java-ilegra\src\main\java\br\com\teste\utils\Propriedades.java
+C:\Users\pedrodonascimento\git\teste-java-ilegra\src\main\java\br\com\teste\utils\TrataComunicacao.java
 C:\Users\pedrodonascimento\git\teste-java-ilegra\src\main\java\br\com\teste\model\Log.java
 C:\Users\pedrodonascimento\git\teste-java-ilegra\src\main\java\br\com\teste\service\MetricasLogService.java
+C:\Users\pedrodonascimento\git\teste-java-ilegra\src\main\java\br\com\teste\service\InserirLogService.java
+C:\Users\pedrodonascimento\git\teste-java-ilegra\src\main\java\br\com\teste\utils\JsonTransformer.java

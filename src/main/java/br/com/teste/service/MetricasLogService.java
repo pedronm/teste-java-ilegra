@@ -22,13 +22,21 @@ public class MetricasLogService {
 	private int codMetrica;
 	
 	public List<Log> decideMetrica(String codMetrica) {
-		if("1".equals(codMetrica)) {
-			
-		}
+		List<Log> retorno = new ArrayList<>();
+		Log teste = new Log();
+		
+		teste.setRegionCode(3);
+		teste.setTimestamp("123242151366");
+		teste.setUrl("/teste/teste");
+		teste.setUuid("33444412255");
+		retorno.add(teste);
+//		if("1".equals(codMetrica)) {
+//			""
+//		}
 		
 		
 		
-		return null;
+		return retorno;
 	}
 	
 	

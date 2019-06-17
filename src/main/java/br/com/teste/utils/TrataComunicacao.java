@@ -17,6 +17,7 @@ public class TrataComunicacao {
 		
 		Gson gson = new Gson();
 		Type tipoLista = new TypeToken<ArrayList<Log>>(){}.getType();
+//		return gson.fromJson(request.attribute("logs"), tipoLista);				
 		return gson.fromJson(request.queryParams("logs"), tipoLista);				
 		
 	}
