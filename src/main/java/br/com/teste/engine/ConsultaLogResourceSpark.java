@@ -11,14 +11,14 @@ import com.google.gson.Gson;
 
 import br.com.teste.service.InserirLogService;
 import br.com.teste.service.MetricasLogService;
-import br.com.teste.utils.TrataComunicacao;
+import br.com.teste.utils.RequestPostLog;
 
 
 public class ConsultaLogResourceSpark {
 	
 	public static MetricasLogService metricas = new MetricasLogService();	
 	public static InserirLogService logs = new InserirLogService();
-	public static TrataComunicacao comm = new TrataComunicacao();
+	public static RequestPostLog postLog = new RequestPostLog();
 	
 	public static void main(String[] args) throws SQLException {	
 		
@@ -41,8 +41,8 @@ public class ConsultaLogResourceSpark {
 	            	", email=test@test.net";                
 		});
 		
-		post("/log/ingest", (request, response) -> {			
-			return logs.inserirLog(comm.trataRequisicao(request,response));			
+		post("/log/ingest", "application/json", (request, response)  -> {
+			return logs.inserirLog(postLog.trataRequisicao(request.body(),"logs"));
 		});
 		
 		after( (request, response)->{
