@@ -3,26 +3,26 @@ package br.com.teste.engine;
 import static spark.Spark.after;
 import static spark.Spark.before;
 import static spark.Spark.get;
+import static spark.Spark.port;
 import static spark.Spark.post;
 
 import java.sql.SQLException;
 
-import com.google.gson.Gson;
-
 import br.com.teste.service.InserirLogService;
 import br.com.teste.service.MetricasLogService;
-import br.com.teste.utils.RequestPostLog;
+import br.com.teste.utils.JsonTransformer;
+import br.com.teste.utils.ParseJsonPost;
 
 
 public class ConsultaLogResourceSpark {
 	
-	public static MetricasLogService metricas = new MetricasLogService();	
-	public static InserirLogService logs = new InserirLogService();
-	public static RequestPostLog postLog = new RequestPostLog();
+	public static final MetricasLogService metricas = new MetricasLogService();	
+	public static final InserirLogService logs = new InserirLogService();
+	public static final ParseJsonPost postLog = new ParseJsonPost();
 	
 	public static void main(String[] args) throws SQLException {	
 		
-		Gson gson = new Gson();
+		port(9885);
 
 		before((request, response) -> {
 			
@@ -34,7 +34,7 @@ public class ConsultaLogResourceSpark {
 		
 		get("/log/metrics/:codMetrica", (request, response) -> {
 			return metricas.decideMetrica(request.params("codMetrica"));
-		}, gson :: toJson);
+		},new JsonTransformer());
 		
 		get("/log/health", ( request, response) -> {
 	            return  "User: username=:"+ 

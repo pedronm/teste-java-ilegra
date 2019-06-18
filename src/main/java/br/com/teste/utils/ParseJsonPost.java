@@ -22,19 +22,18 @@ import br.com.teste.model.Log;
  * @param <T>
  *
  */
-public abstract class ParseJsonPost {
+public class ParseJsonPost {
 		
 		protected static Gson gson = new Gson();
-		protected ExitrairJsonStrategy strategyJson;
 				
-		public <T> List<T> trataRequisicao(String body, String atributo){
+		public List<Log> trataRequisicao(String body, String atributo) throws Exception{
 			
-			List<T> retorno = new ArrayList<>();
+			List<Log> retorno = new ArrayList<>();
 			JsonParser parser = new JsonParser();
 			
 			JsonArray arrayOfJson = converteEntrada(body, atributo, parser);
 			
-			retorno = strategyJson.extrairJson(arrayOfJson);
+			retorno = this.extrairJson(arrayOfJson);
 			
 			return retorno;
 			
@@ -46,6 +45,13 @@ public abstract class ParseJsonPost {
 			return arrayOfJson;
 		}
 		
+		public List<Log> extrairJson(JsonArray arrayOfJson) {
+			List<Log> retorno = new ArrayList<>();
+			for (JsonElement json : arrayOfJson) {
+				retorno.add(gson.fromJson(json, Log.class));
+			}
+			return retorno;
+		}
 	
 
 }

@@ -27,11 +27,11 @@ public class LogRepository {
 	}
 	
 	public void manterConexao(String url, String login, String senha) {
-		ConnectionSource conexao;
+		ConnectionSource conexao;		
 		try {
-			conexao = new JdbcConnectionSource(url);
+			conexao = new JdbcConnectionSource(url);			
 			((JdbcConnectionSource)conexao).setUsername(login);
-			((JdbcConnectionSource)conexao).setPassword(senha);
+			((JdbcConnectionSource)conexao).setPassword(senha); 
 			this.conexao = conexao;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -39,10 +39,10 @@ public class LogRepository {
 	}
 	
 	public void inserirLog(List<Log> logs) {
-		try {
-			TableUtils.createTableIfNotExists(this.conexao, Log.class);
+		try {			
+			TableUtils.createTableIfNotExists(this.conexao, Log.class);			
 			Dao<Log,String> logDao = DaoManager.createDao(conexao, Log.class);
-			for (Log log : logDao) {
+			for (Log log : logs) {
 				logDao.createOrUpdate(log);
 			}
 		} catch (SQLException e) {
