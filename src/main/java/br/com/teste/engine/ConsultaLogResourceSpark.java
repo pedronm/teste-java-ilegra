@@ -21,14 +21,7 @@ public class ConsultaLogResourceSpark {
 	public static final InserirLogService logs = new InserirLogService();
 	public static final ParseJsonPost postLog = new ParseJsonPost();
 	
-	public static void main(String[] args) throws SQLException {	
-		
-		port(9888);
-
-		before((request, response) -> {
-			
-		});
-
+	public void init() {
 		get("/log/metrics/top-3-around-world", (request, response) -> {
 			return metricas.topTresMundo();
 		},new JsonTransformer());
@@ -50,7 +43,8 @@ public class ConsultaLogResourceSpark {
 		},new JsonTransformer());
 		
 		get("/log/health", ( request, response) -> {
-	            return  "teste";                
+			response.status(200);
+	        return "Saudável";                
 		});
 		
 		post("/log/ingest", "application/json", (request, response)  -> {
@@ -58,11 +52,11 @@ public class ConsultaLogResourceSpark {
 			response.status(200);
 			return "Inserido com sucesso";
 		});
-		
-		after( (request, response)->{
-			
-		});
-		
+
 	}
+//	public static void main(String[] args) throws SQLException {	
+//		
+//		
+//	}
 
 }

@@ -4,16 +4,16 @@
 
 <web-app>
 	<display-name>Teste Java Ilegra</display-name>
-	<!-- <filter>
+	<filter>
 		<filter-name>spark</filter-name>
 		<filter-class>spark.servlet.SparkFilter</filter-class>
 		<init-param>
 			<param-name>consultaLog</param-name>
-			<param-value>br.com.teste.main.ConsultaLogResourceSpark</param-value>
+			<param-value>br.com.teste.engine.ConsultaLogResourceSpark</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>spark</filter-name>
 		<url-pattern>/api</url-pattern>
-	</filter-mapping> -->
+ 	</filter-mapping> 
 </web-app>
