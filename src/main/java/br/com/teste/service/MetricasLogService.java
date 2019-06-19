@@ -1,53 +1,59 @@
 package br.com.teste.service;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
-
-import com.j256.ormlite.stmt.PreparedQuery;
 
 import br.com.teste.model.Log;
 import br.com.teste.repository.LogRepository;
 
 public class MetricasLogService {
-	
-	private LogRepository rep = new LogRepository("jdbc:mysql://127.0.0.1:3306/testeilegra", "root", "");
-	private PreparedQuery query;
-//	Metricas 
-//	 us-east-1(1), us-west-2(2) and ap-south-1(3)
-//	  URL				 timestamp     UUID									Region Code
-//	 /pets/exotic/cats 1037825323957 5b019db5-b3d0-46d2-9963-437860af707f 1
-//	Top 3 url accessed Per REgion [ ]
-//	 Top 3 url accessed around the world [ ]
-//	 The url with less access in all world [ ] 
-//	 Top 3 access per day, week, year (you receive the Day/week/year by parameter) [ ]
-//	 the minute with more access in al url [ ]
 
+	private LogRepository rep = new LogRepository("jdbc:mysql://127.0.0.1:3306/testeilegra", "root", "");
 
 	public List<Log> topTresMundo() {
-		return null;
+		String consulta = "SELECT l.*, COUNT(regionCode) AS totalCountry " + "	FROM LOGS l"
+				+ "	group BY url,regionCode" + " ORDER BY totalCountry desc" + " limit 3;";
+		return rep.consultaQuery(consulta);
+
 	}
 
-
-	public Object topTresRegiao() {
-		// TODO Auto-generated method stub
-		return null;
+	public Object topTresRegiao(String regiao) {
+		String consulta = "SELECT l.*, COUNT(regionCode) AS totalCountry " + "	FROM LOGS l" + "	WHERE regionCode = "
+				+ regiao + "	group BY url,regionCode" + "	ORDER BY totalCountry desc" + " limit 3";
+		//
+		return rep.consultaQuery(consulta);
 	}
-
 
 	public Object menorAcessoMundial() {
-		// TODO Auto-generated method stub
-		return null;
+		String consulta = "SELECT l.*, COUNT(regionCode) AS totalCountry " + "	FROM LOGS l	"
+				+ "	group BY url,regionCode" + "	ORDER BY totalCountry asc	" + "	limit 3";
+
+		return rep.consultaQuery(consulta);
 	}
 
+	public Object topTresPorDia(String dia) {
+		String dataIni = converteData(dia);
+		String dataFim = converteData((LocalDate.parse(dia).plusDays(1).toString()));
 
-	public Object topTresPorDia(String params) {
-		// TODO Auto-generated method stub
-		return null;
+		String consulta = "SELECT l.*, COUNT(url) AS totalAccess" + "	FROM LOGS l	" + "	WHERE TIMESTAMP BETWEEN"
+				+ dataIni + "AND" + dataFim + "	group BY url,regionCode" + "	ORDER BY totalAccess desc	"
+				+ "	limit 3";
+
+		return rep.consultaQuery(consulta);
 	}
 
+	public Object minutoComMaiorAcessos() {
+		String consulta = "SELECT l.*, COUNT(url) AS totalAccess" + "			 , ((l.timestamp/1000)/60)  AS minuto"
+				+ "	FROM LOGS l		" + "	group BY minuto" + "	ORDER BY totalAccess desc	" + "	limit 3";
 
-	public Object minutoComMaiorAcessos(String params) {
-		// TODO Auto-generated method stub
-		return null;
+		return rep.consultaQuery(consulta);
+	}
+
+	public String converteData(String data) {
+		LocalDate date = LocalDate.parse(data);
+		Timestamp timestamp = Timestamp.valueOf(date.atStartOfDay());
+		return String.valueOf(timestamp);
 	}
 
 }

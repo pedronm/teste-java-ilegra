@@ -23,7 +23,7 @@ public class ConsultaLogResourceSpark {
 	
 	public static void main(String[] args) throws SQLException {	
 		
-		port(9885);
+		port(9888);
 
 		before((request, response) -> {
 			
@@ -33,20 +33,20 @@ public class ConsultaLogResourceSpark {
 			return metricas.topTresMundo();
 		},new JsonTransformer());
 		
-		get("/log/metrics/top-3-per-region/", (request, response) -> {
-			return metricas.topTresRegiao();
+		get("/log/metrics/top-3-per-region/:codRegiao", (request, response) -> {
+			return metricas.topTresRegiao(request.params("codRegiao"));
 		},new JsonTransformer());
 		
 		get("/log/metrics/less-access-around-world", (request, response) -> {
 			return metricas.menorAcessoMundial();
 		},new JsonTransformer());
 		
-		get("/log/metrics/top-3-access-per-day", (request, response) -> {
-			return metricas.topTresPorDia(request.params("dia"));
+		get("/log/metrics/top-3-access-per-day/:data", (request, response) -> {
+			return metricas.topTresPorDia(request.params("data"));
 		},new JsonTransformer());
 		
 		get("/log/metrics/the-minute-with-more-acces", (request, response) -> {
-			return metricas.minutoComMaiorAcessos(request.params("codMetrica"));
+			return metricas.minutoComMaiorAcessos();
 		},new JsonTransformer());
 		
 		get("/log/health", ( request, response) -> {

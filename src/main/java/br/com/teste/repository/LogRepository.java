@@ -7,8 +7,9 @@ import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.dao.GenericRawResults;
+import com.j256.ormlite.dao.RawRowMapper;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
-import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -52,12 +53,25 @@ public class LogRepository {
 		}
 	}
 	
-	public List<Log> consultaQuery(PreparedQuery query){
-		List<Log> retorno = new ArrayList<>();
-		try {
+	public List<Log> consultaQuery(String statement){
+		List<Log> retorno = new ArrayList<>();		
+		
+		try {			
+			String arguments = new String();
+			GenericRawResults<Log> resultados = null;
 			TableUtils.createTableIfNotExists(this.conexao, Log.class);			
-			Dao<Log,String> logDao = DaoManager.createDao(conexao, Log.class);
-			logDao.query(query);
+			Dao<Log,String> logDao = DaoManager.createDao(conexao, Log.class);			
+			resultados = logDao.queryRaw(statement,
+					    new RawRowMapper<Log>() {
+		            public Log mapRow(String[] columnNames,
+		              String[] resultColumns) {
+		                return new Log(String.valueOf(resultColumns[1]),
+		                    String.valueOf(resultColumns[2]),
+		                	String.valueOf(resultColumns[3]),
+							Integer.valueOf(resultColumns[4]));
+		        }
+		    });	
+			retorno = resultados.getResults();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
