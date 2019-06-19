@@ -9,7 +9,7 @@ import br.com.teste.repository.LogRepository;
 
 public class MetricasLogService {
 
-	private LogRepository rep = new LogRepository("jdbc:mysql://127.0.0.1:3306/testeilegra", "root", "");
+	private LogRepository rep = new LogRepository("jdbc:mysql://35.238.66.132:3306/testeilegra", "root", "");
 
 	public List<Log> topTresMundo() {
 		String consulta = "SELECT l.*, COUNT(regionCode) AS totalCountry " + "	FROM LOGS l"

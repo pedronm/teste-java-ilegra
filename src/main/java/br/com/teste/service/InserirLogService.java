@@ -8,7 +8,7 @@ import br.com.teste.repository.LogRepository;
 
 public class InserirLogService {
 	
-	private LogRepository rep = new LogRepository("jdbc:mysql://127.0.0.1:3306/testeilegra", "root", "");
+	private LogRepository rep = new LogRepository("jdbc:mysql://35.238.66.132:3306/testeilegra", "root", "");
 	
 	public void inserirLog(List<Log> logs) throws SQLException {
 
