@@ -12,6 +12,7 @@ import br.com.teste.service.InserirLogService;
 import br.com.teste.service.MetricasLogService;
 import br.com.teste.utils.JsonTransformer;
 import br.com.teste.utils.ParseJsonPost;
+import spark.Redirect;
 
 
 public class ConsultaLogResourceSpark {
@@ -27,22 +28,35 @@ public class ConsultaLogResourceSpark {
 		before((request, response) -> {
 			
 		});
+
+		get("/log/metrics/top-3-around-world", (request, response) -> {
+			return metricas.topTresMundo();
+		},new JsonTransformer());
 		
-		get("/teste/:nome", (request,response)->{
-			return "Hello mr(s)"+request.params("nome");					
-		});
+		get("/log/metrics/top-3-per-region/", (request, response) -> {
+			return metricas.topTresRegiao();
+		},new JsonTransformer());
 		
-		get("/log/metrics/:codMetrica", (request, response) -> {
-			return metricas.decideMetrica(request.params("codMetrica"));
+		get("/log/metrics/less-access-around-world", (request, response) -> {
+			return metricas.menorAcessoMundial();
+		},new JsonTransformer());
+		
+		get("/log/metrics/top-3-access-per-day", (request, response) -> {
+			return metricas.topTresPorDia(request.params("dia"));
+		},new JsonTransformer());
+		
+		get("/log/metrics/the-minute-with-more-acces", (request, response) -> {
+			return metricas.minutoComMaiorAcessos(request.params("codMetrica"));
 		},new JsonTransformer());
 		
 		get("/log/health", ( request, response) -> {
-	            return  "User: username=:"+ 
-	            	", email=test@test.net";                
+	            return  "teste";                
 		});
 		
 		post("/log/ingest", "application/json", (request, response)  -> {
-			return logs.inserirLog(postLog.trataRequisicao(request.body(),"logs"));
+			logs.inserirLog(postLog.trataRequisicao(request.body(),"logs"));
+			response.status(200);
+			return "Inserido com sucesso";
 		});
 		
 		after( (request, response)->{

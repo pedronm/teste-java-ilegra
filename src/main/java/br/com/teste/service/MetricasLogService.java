@@ -1,15 +1,16 @@
 package br.com.teste.service;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import com.j256.ormlite.stmt.PreparedQuery;
 
 import br.com.teste.model.Log;
 import br.com.teste.repository.LogRepository;
 
 public class MetricasLogService {
 	
-	LogRepository rep;
-	
+	private LogRepository rep = new LogRepository("jdbc:mysql://127.0.0.1:3306/testeilegra", "root", "");
+	private PreparedQuery query;
 //	Metricas 
 //	 us-east-1(1), us-west-2(2) and ap-south-1(3)
 //	  URL				 timestamp     UUID									Region Code
@@ -19,29 +20,34 @@ public class MetricasLogService {
 //	 The url with less access in all world [ ] 
 //	 Top 3 access per day, week, year (you receive the Day/week/year by parameter) [ ]
 //	 the minute with more access in al url [ ]
-	private int codMetrica;
-	
-	public List<Log> decideMetrica(String codMetrica) {
-		List<Log> retorno = new ArrayList<>();
-		Log teste = new Log();
-		
-		teste.setRegionCode(3);
-		teste.setTimestamp("123242151366");
-		teste.setUrl("/teste/teste");
-		teste.setUuid("33444412255");
-		retorno.add(teste);
-//		if("1".equals(codMetrica)) {
-//			""
-//		}
-		
-		
-		
-		return retorno;
+
+
+	public List<Log> topTresMundo() {
+		return null;
 	}
-	
-	
-	public List<Log> topUrlPorRegiao() {
-		return new ArrayList<>();
+
+
+	public Object topTresRegiao() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Object menorAcessoMundial() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Object topTresPorDia(String params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Object minutoComMaiorAcessos(String params) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
