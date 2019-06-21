@@ -69,7 +69,7 @@
 	<repository>
 	  <id>nexus-releases</id>
 	  <name>releases</name>
-	  <url>http://myNexus/more/stuff</url>
+	  <url>http://localhost:8081/nexus/</url>
 	 </repository>
 </distributionManagement>
 </project>
