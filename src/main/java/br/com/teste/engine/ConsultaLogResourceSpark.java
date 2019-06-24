@@ -7,7 +7,7 @@ import static spark.Spark.port;
 import static spark.Spark.post;
 
 import java.sql.SQLException;
-
+import spark.servlet.SparkApplication;
 import br.com.teste.service.InserirLogService;
 import br.com.teste.service.MetricasLogService;
 import br.com.teste.utils.JsonTransformer;
@@ -15,12 +15,13 @@ import br.com.teste.utils.ParseJsonPost;
 import spark.Redirect;
 
 
-public class ConsultaLogResourceSpark {
+public class ConsultaLogResourceSpark implements SparkApplication{
 	
 	public static final MetricasLogService metricas = new MetricasLogService();	
 	public static final InserirLogService logs = new InserirLogService();
 	public static final ParseJsonPost postLog = new ParseJsonPost();
 	
+	@Override
 	public void init() {
 		get("/log/metrics/top-3-around-world", (request, response) -> {
 			return metricas.topTresMundo();
@@ -54,6 +55,8 @@ public class ConsultaLogResourceSpark {
 		});
 
 	}
+	
+	
 //	public static void main(String[] args) throws SQLException {	
 //		
 //		
