@@ -14,52 +14,82 @@ import br.com.teste.utils.JsonTransformer;
 import br.com.teste.utils.ParseJsonPost;
 import spark.Redirect;
 
-
-public class ConsultaLogResourceSpark implements SparkApplication{
-	
+//
+//public class ConsultaLogResourceSpark implements SparkApplication{
+public class ConsultaLogResourceSpark {	
 	public static final MetricasLogService metricas = new MetricasLogService();	
 	public static final InserirLogService logs = new InserirLogService();
 	public static final ParseJsonPost postLog = new ParseJsonPost();
 	
-	@Override
-	public void init() {
+//	@Override
+//	public void init() {
+//		get("/log/metrics/top-3-around-world", (request, response) -> {
+//			return metricas.topTresMundo();
+//		},new JsonTransformer());
+//		
+//		get("/log/metrics/top-3-per-region/:codRegiao", (request, response) -> {
+//			return metricas.topTresRegiao(request.params("codRegiao"));
+//		},new JsonTransformer());
+//		
+//		get("/log/metrics/less-access-around-world", (request, response) -> {
+//			return metricas.menorAcessoMundial();
+//		},new JsonTransformer());
+//		
+//		get("/log/metrics/top-3-access-per-day/:data", (request, response) -> {
+//			return metricas.topTresPorDia(request.params("data"));
+//		},new JsonTransformer());
+//		
+//		get("/log/metrics/the-minute-with-more-acces", (request, response) -> {
+//			return metricas.minutoComMaiorAcessos();
+//		},new JsonTransformer());
+//		
+//		get("/log/health", ( request, response) -> {
+//			response.status(200);
+//	        return "Saudável";                
+//		});
+//		
+//		post("/log/ingest", "application/json", (request, response)  -> {
+//			logs.inserirLog(postLog.trataRequisicao(request.body(),"logs"));
+//			response.status(200);
+//			return "Inserido com sucesso";
+//		});
+//
+//	}
+	
+	
+	public static void main(String[] args) throws SQLException {	
+		
+		
 		get("/log/metrics/top-3-around-world", (request, response) -> {
 			return metricas.topTresMundo();
-		},new JsonTransformer());
-		
+		}, new JsonTransformer());
+
 		get("/log/metrics/top-3-per-region/:codRegiao", (request, response) -> {
 			return metricas.topTresRegiao(request.params("codRegiao"));
-		},new JsonTransformer());
-		
+		}, new JsonTransformer());
+
 		get("/log/metrics/less-access-around-world", (request, response) -> {
 			return metricas.menorAcessoMundial();
-		},new JsonTransformer());
-		
+		}, new JsonTransformer());
+
 		get("/log/metrics/top-3-access-per-day/:data", (request, response) -> {
 			return metricas.topTresPorDia(request.params("data"));
-		},new JsonTransformer());
-		
+		}, new JsonTransformer());
+
 		get("/log/metrics/the-minute-with-more-acces", (request, response) -> {
 			return metricas.minutoComMaiorAcessos();
-		},new JsonTransformer());
-		
-		get("/log/health", ( request, response) -> {
+		}, new JsonTransformer());
+
+		get("/log/health", (request, response) -> {
 			response.status(200);
-	        return "Saudável";                
+			return "Saudável";
 		});
-		
-		post("/log/ingest", "application/json", (request, response)  -> {
-			logs.inserirLog(postLog.trataRequisicao(request.body(),"logs"));
+
+		post("/log/ingest", "application/json", (request, response) -> {
+			logs.inserirLog(postLog.trataRequisicao(request.body(), "logs"));
 			response.status(200);
 			return "Inserido com sucesso";
 		});
-
 	}
-	
-	
-//	public static void main(String[] args) throws SQLException {	
-//		
-//		
-//	}
 
 }
